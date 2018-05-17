@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static android.graphics.Color.*;
 
@@ -34,12 +35,8 @@ public class CustomAdapter extends ArrayAdapter<CustomData> {
         super(context, R.layout.activity_custom_list, data);
         this.arrayList=data;
         this.Ccontext=context;
-
     }
 
-    @SuppressLint("ResourceType")
-    @NonNull
-    @Override
     public View getView(  int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater layoutInflater = (LayoutInflater) Ccontext.getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
@@ -54,7 +51,16 @@ public class CustomAdapter extends ArrayAdapter<CustomData> {
         Oname.setText(CD.getName());
         Onumber.setText(CD.getNumber());
         Oicon.setText(CD.getIcon()+"");
+        Random r = new Random();
 
+        imageView.setColorFilter(Color.argb(255, r.nextInt(256), r.nextInt(256), r.nextInt(256) ));
+
+
+        if(position%2==0){
+            view.setBackgroundColor(Color.WHITE);
+        }    else{
+            view.setBackgroundColor(Color.GRAY);
+        }
 
         return view;
     }
